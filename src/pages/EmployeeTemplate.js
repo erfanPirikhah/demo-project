@@ -16,8 +16,16 @@ function EmployeeTemplate(props) {
   const completedTasks = tasks.filter((task) => task.Status === 'Completed');
 
   return (
-    <React.Fragment>
-      <div className="employeeInfo">
+    <>
+    <form>
+      <div className='grid grid-cols-4 gap-2'>
+        <input />
+        <input />
+        <input />
+        <input />
+      </div>
+    </form>
+      {/* <div className="employeeInfo">
         <img className="employeePhoto" src={Picture} />
         <p className="employeeNotes">
           <b>{`Position: ${Position}`}</b>
@@ -35,8 +43,8 @@ function EmployeeTemplate(props) {
           selectionMode="multiple"
           itemRender={itemRender}
         ></List>
-      </div>
-    </React.Fragment>
+      </div> */}
+    </>
   );
 }
 

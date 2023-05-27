@@ -66,8 +66,8 @@ function Tab3() {
   }, [employees, setEmployees]);
 
   return (
-    <React.Fragment>
-      <div id="container">
+    <div style={{ direction: "rtl" }}>
+      <div id="container" >
         <Button
           disabled={disableButton()}
           text="Add Tab"
@@ -77,6 +77,7 @@ function Tab3() {
         />
       </div>
       <Sortable
+        style={{ direction: "rtl" }}
         filter=".dx-tab"
         data={employees}
         itemOrientation="horizontal"
@@ -85,8 +86,9 @@ function Tab3() {
         onReorder={onTabDrop}
       >
         <TabPanel
+          style={{ direction: "rtl" }}
           dataSource={employees}
-          height={410}
+          height={10000}
           itemTitleRender={renderTitle}
           deferRendering={false}
           showNavButtons={true}
@@ -96,7 +98,7 @@ function Tab3() {
           itemComponent={EmployeeTemplate}
         />
       </Sortable>
-    </React.Fragment>
+    </div>
   );
 }
 
