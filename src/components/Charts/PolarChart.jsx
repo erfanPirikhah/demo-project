@@ -9,7 +9,7 @@ const PolarChart = () => {
         type: "polarArea",
         fontFamily: "Vazir",
       },
-      labels: ["data_1", "data_2", "data_3", "data_4"],
+      labels: ["بهار", "تابستان", "پاییز", "زمستان"],
       stroke: {
         colors: ["#fff"],
       },

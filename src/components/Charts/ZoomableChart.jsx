@@ -5,7 +5,7 @@ const ZoomableChart = () => {
   const option = {
     series: [
       {
-        name: "XYZ MOTORS",
+        name: "تعداد",
         data: [
           [1322508400000, 34],
           [1323594800000, 54],
@@ -56,7 +56,7 @@ const ZoomableChart = () => {
       yaxis: {
         labels: {
           formatter: function (val) {
-            return (val / 1000000).toFixed(0);
+            return val
           },
         },
         // title: {
@@ -70,7 +70,7 @@ const ZoomableChart = () => {
         shared: false,
         y: {
           formatter: function (val) {
-            return (val / 1000000).toFixed(0);
+            return val
           },
         },
       },

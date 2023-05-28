@@ -19,8 +19,8 @@ const BarChart = (props) => {
       },
       plotOptions: {
         bar: {
-          borderRadius: 10,
-          
+          borderRadius: 9,
+
           horizontal: props.horizontal,
           dataLabels: {
             position: "top", // top, center, bottom
@@ -36,7 +36,7 @@ const BarChart = (props) => {
         style: {
           fontSize: "12px",
           colors: ["#304758"],
-          
+
         },
       },
 
@@ -91,7 +91,7 @@ const BarChart = (props) => {
     },
   };
   return (
-    <div id="chart">
+    <div id="chart" style={{direction: "ltr"}}>
       <ReactApexChart
         options={option.options}
         series={option.series}

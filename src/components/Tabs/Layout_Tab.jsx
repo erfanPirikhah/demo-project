@@ -12,6 +12,8 @@ import { css } from "@emotion/css";
 import Form_One from "../forms/Form_One";
 import Form_Two from "../forms/Form_Two";
 import Report from "../Report/Report";
+import Form_Three from "../forms/Form_Three";
+import Form_Four from "../forms/Form_Four";
 
 const initialItems = [
   {
@@ -26,19 +28,19 @@ const initialItems = [
   },
   {
     label: "تب شماره سه",
-    children: "Content of Tab 3",
+    children: <Report />,
     key: "3",
-    closable: <Report />,
+    // closable:true,
   },
   {
     label: "تب شماره چهار",
-    children: "Content of Tab 3",
+    children: <Form_Three />,
     key: "4",
     // closable: false,
   },
   {
     label: "تب شماره پنج",
-    children: "Content of Tab 3",
+    children: <Form_Four />,
     key: "5",
     // closable: false,
   },

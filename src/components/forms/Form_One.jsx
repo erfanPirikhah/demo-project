@@ -38,6 +38,7 @@ const Form_One = () => {
         // labelCol={{
         //   span: 8,
         // }}
+
         wrapperCol={
           {
             // span: 16,
@@ -153,7 +154,7 @@ const Form_One = () => {
             label="ارز"
             name="name10"
             required={false}
-            // message="پر کردن فیلد الزامی است"
+          // message="پر کردن فیلد الزامی است"
           />
           <div className=" grid grid-cols-3 gap-3 mt-2">
             <Text_Input

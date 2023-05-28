@@ -11,21 +11,30 @@ import {
 
 const Report = () => {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-4 gap-2">
+      <Report_Section title="نمودار بر اساس ریز گزارشات" chart={<ZoomableChart />} grid="col-span-4" />
+
       <Report_Section
-        title=""
+        title="نمودار گزارش بر اساس روز های هفته"
         chart={<BarChart data={weekly_bar_chart_data} color="#0289f7" />}
-      />{" "}
+        grid="col-span-2"
+      />
+
+<Report_Section title="نمودار گزارش بر اساس فصل ها" chart={<PolarChart />} grid="col-span-2" />
+
       <Report_Section
-        title=""
+        title="نمودار گزارش در یک شبانه روز"
         chart={<BarChart data={hourly_bar_chart_data} color="#7a33de" />}
-      />{" "}
-      <Report_Section title="" chart={<ZoomableChart />} />{" "}
+        grid="col-span-2"
+      />
+
       <Report_Section
-        title=""
+        title="نمودار گزارش بر اساس ماه های سال"
         chart={<BarChart data={monthly_bar_chart_data} color="#57dbde" />}
-      />{" "}
-      <Report_Section title="" chart={<PolarChart />} /> 
+        grid="col-span-2"
+      />
+
+     
     </div>
   );
 };
