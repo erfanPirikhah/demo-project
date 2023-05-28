@@ -33,7 +33,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>صفحه اصلی</span>
@@ -59,7 +59,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>موسیقی</span>
@@ -72,7 +72,7 @@ const Sidbar = (props) => {
                           <div className="flex w-full justify-end rounded-lg py-2 text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900">
                             {/* <BsChevronDown
                                     className={`${open ? 'rotate-180 transform' : ''
-                                      } h-4 w-4 text-purple-500`}
+                                      } h-4 w-4 text-gray-500`}
                                   /> */}
                             <div className="flex justify-between items-center gap-4">
                               <span>zzzzz</span>
@@ -90,7 +90,7 @@ const Sidbar = (props) => {
                                 <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900">
                                   <BsChevronDown
                                     className={`${open ? 'rotate-180 transform' : ''
-                                      } h-4 w-4 text-purple-500`}
+                                      } h-4 w-4 text-gray-500`}
                                   />
                                   <div className="flex justify-between items-center gap-4">
                                     <span>پیانو</span>
@@ -113,7 +113,7 @@ const Sidbar = (props) => {
                                 <Disclosure.Button className="flex w-full justify-end rounded-lg py-2 text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900">
                                   {/* <BsChevronDown
                                     className={`${open ? 'rotate-180 transform' : ''
-                                      } h-4 w-4 text-purple-500`}
+                                      } h-4 w-4 text-gray-500`}
                                   /> */}
                                   <div className="flex justify-between items-center gap-4">
                                     <span>پیانو</span>
@@ -144,7 +144,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>نوشیدنی</span>
@@ -169,7 +169,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>فروشگاه</span>
@@ -194,7 +194,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>چت</span>
@@ -219,7 +219,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>Profile</span>
@@ -244,7 +244,7 @@ const Sidbar = (props) => {
                     <Disclosure.Button className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-sm font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""}`}>
                       <BsChevronDown
                         className={`${open ? 'rotate-180 transform' : ''
-                          } h-4 w-4 text-purple-500`}
+                          } h-4 w-4 text-gray-500`}
                       />
                       <div className="flex justify-between items-center gap-4">
                         <span>اعلانات</span>
