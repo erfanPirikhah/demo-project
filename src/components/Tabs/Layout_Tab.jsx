@@ -12,45 +12,44 @@ import { css } from "@emotion/css";
 import Form_One from "../forms/Form_One";
 import Form_Two from "../forms/Form_Two";
 import Report from "../Report/Report";
-import Form_Three from "../forms/Form_Three";
-import Form_Four from "../forms/Form_Four";
+import { useTabs, useTabsAction } from "../../context/TabProviders";
 
-const initialItems = [
-  {
-    label: "تب شماره یک",
-    children: <Form_One />,
-    key: "1",
-  },
-  {
-    label: "تب شماره دو",
-    children: <Form_Two />,
-    key: "2",
-  },
-  {
-    label: "تب شماره سه",
-    children: <Report />,
-    key: "3",
-    // closable:true,
-  },
-  {
-    label: "تب شماره چهار",
-    children: <Form_Three />,
-    key: "4",
-    // closable: false,
-  },
-  {
-    label: "تب شماره پنج",
-    children: <Form_Four />,
-    key: "5",
-    // closable: false,
-  },
-  {
-    label: "تب شماره شش",
-    children: "Content of Tab 3",
-    key: "6",
-    // closable: false,
-  },
-];
+// const initialItems = [
+//   {
+//     label: "تب شماره یک",
+//     children: <Form_One />,
+//     key: "1",
+//   },
+  // {
+  //   label: "تب شماره دو",
+  //   children: <Form_Two />,
+  //   key: "2",
+  // },
+//   {
+//     label: "تب شماره سه",
+//     children: "Content of Tab 3",
+//     key: "3",
+//     closable: <Report />,
+//   },
+//   {
+//     label: "تب شماره چهار",
+//     children: "Content of Tab 3",
+//     key: "4",
+//     // closable: false,
+//   },
+//   {
+//     label: "تب شماره پنج",
+//     children: "Content of Tab 3",
+//     key: "5",
+//     // closable: false,
+//   },
+//   {
+//     label: "تب شماره شش",
+//     children: "Content of Tab 3",
+//     key: "6",
+//     // closable: false,
+//   },
+// ];
 
 const DraggableTabNode = ({ className, onActiveBarTransform, ...props }) => {
   const {
@@ -89,8 +88,20 @@ const DraggableTabNode = ({ className, onActiveBarTransform, ...props }) => {
   });
 };
 const Layout_Tab = () => {
-  const [activeKey, setActiveKey] = useState(initialItems[0].key);
+  const initialItems = useTabs();
+  const dispatch = useTabsAction()
+
+  console.log(initialItems);
+  
+
+  const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
   const [items, setItems] = useState(initialItems);
+
+  useEffect(()=>{
+    setActiveKey(initialItems[0]?.key)
+    setItems(initialItems)
+  },[initialItems])
+
   const newTabIndex = useRef(0);
   const onChange = (newActiveKey) => {
     setActiveKey(newActiveKey);
@@ -124,6 +135,7 @@ const Layout_Tab = () => {
     }
     setItems(newPanes);
     setActiveKey(newActiveKey);
+    dispatch({type:'restTab',value:newPanes})
   };
   const onEdit = (targetKey, action) => {
     if (action === "add") {
