@@ -9,7 +9,25 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact Component={Home} />
       </Switch>
-    </Layout>
+     </Layout>
+    // <Switch>
+    //   <Route path={["/auth"]}>
+    //     <Layout>
+    //       <Switch>
+    //         <Route path="/" exact element={<>login page</>} />
+    //       </Switch>
+    //     </Layout>
+    //   </Route>
+    //   <Route path={["/dashboard"]}>
+    //     <Layout>
+    //       <Switch>
+    //         <Route path="/dashboard" exact element={Home} />
+    //       </Switch>
+    //     </Layout>
+    //   </Route>
+
+      
+    // </Switch>
   );
 };
 

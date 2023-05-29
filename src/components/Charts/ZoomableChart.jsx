@@ -56,7 +56,7 @@ const ZoomableChart = () => {
       yaxis: {
         labels: {
           formatter: function (val) {
-            return val
+            return Math.floor(val)
           },
         },
         // title: {
@@ -70,7 +70,7 @@ const ZoomableChart = () => {
         shared: false,
         y: {
           formatter: function (val) {
-            return val
+            return Math.floor(val)
           },
         },
       },

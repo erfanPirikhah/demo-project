@@ -62,15 +62,23 @@ const Sidbar = (props) => {
                         <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs text-gray-500">
                           {sideBar.sub.map((sub) => {
                             return (
-                              <div className="w-full px-2 ">
+                              <div
+                                className="w-full px-2 cursor-pointer"
+                                onClick={() =>
+                                  dispatch({
+                                    type: "addTab",
+                                    value: sub.component,
+                                  })
+                                }
+                              >
                                 <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
                                   <div className="flex w-full justify-end rounded-lg py-2 text-left text-xs font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900">
                                     {/* <BsChevronDown
                                         className={`${open ? 'rotate-180 transform' : ''
                                           } h-4 w-4 text-gray-500`}
                                       /> */}
-                                    <div className="flex justify-between items-center gap-4">
-                                      <span onClick={()=>dispatch({type:'addTab',value:sub.component})}>{sub.name}</span>
+                                    <div className="flex justify-between items-center gap-4 ">
+                                      <span>{sub.name}</span>
                                       <BsCircleFill
                                         size={6}
                                         className=" text-gray-400"
@@ -82,7 +90,6 @@ const Sidbar = (props) => {
                             );
                           })}
                         </Disclosure.Panel>
-                        
                       </>
                     )}
                   </Disclosure>

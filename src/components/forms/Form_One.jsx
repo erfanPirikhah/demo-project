@@ -29,6 +29,14 @@ const items = [
 
 const Form_One = () => {
   const [input_size] = useState("small");
+  const [tableLoader, setTableLoader] = useState(false);
+
+  const loader_Table = () => {
+    setTableLoader(true);
+    setTimeout(() => {
+      setTableLoader(false);
+    }, 1000);
+  };
   return (
     <div>
       <div className="border-1 rounded-lg"></div>
@@ -143,10 +151,10 @@ const Form_One = () => {
           </div>
         </Form_Section>
         <Form_Section>
-          <Segmented options={items} />
+          <Segmented options={items} onChange={loader_Table} />
           {/* <Tabs defaultActiveKey="1" items={items} onChange={() => {}} /> */}
           <div>
-            <TableUi />
+            <TableUi loader={tableLoader} />
           </div>
         </Form_Section>
         <Form_Section>
@@ -154,7 +162,7 @@ const Form_One = () => {
             label="ارز"
             name="name10"
             required={false}
-          // message="پر کردن فیلد الزامی است"
+            // message="پر کردن فیلد الزامی است"
           />
           <div className=" grid grid-cols-3 gap-3 mt-2">
             <Text_Input

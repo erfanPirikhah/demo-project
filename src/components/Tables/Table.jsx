@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Space, Table, Tag } from "antd";
+
+const random_number = () => {
+  return Math.floor(Math.random() * 900);
+};
 const columns = [
   {
     title: "ردیف",
@@ -70,13 +74,13 @@ const data = [
     age: 32,
     address: "New York ",
     tags: ["nice", "developer"],
-    col1: "123",
+    col1: random_number(),
     col2: "نام عملیات",
     col3: "ارز",
-    col4: "153000",
-    col5: "42500",
-    col6: "3560",
-    col7: "1480",
+    col4: random_number(),
+    col5: random_number(),
+    col6: random_number(),
+    col7: random_number(),
     col8: "",
     col9: "",
   },
@@ -86,13 +90,13 @@ const data = [
     age: 42,
     address: "London ",
     tags: ["loser"],
-    col1: "123",
+    col1: random_number(),
     col2: "نام عملیات",
     col3: "ارز",
-    col4: "153000",
-    col5: "42500",
-    col6: "3560",
-    col7: "1480",
+    col4: random_number(),
+    col5: random_number(),
+    col6: random_number(),
+    col7: random_number(),
     col8: "",
     col9: "",
   },
@@ -102,13 +106,13 @@ const data = [
     age: 32,
     address: "Sydney ",
     tags: ["cool", "teacher"],
-    col1: "123",
+    col1: random_number(),
     col2: "نام عملیات",
     col3: "ارز",
-    col4: "153000",
-    col5: "42500",
-    col6: "3560",
-    col7: "1480",
+    col4: random_number(),
+    col5: random_number(),
+    col6: random_number(),
+    col7: random_number(),
     col8: "",
     col9: "",
     col10: "",
@@ -119,19 +123,24 @@ const data = [
     age: 32,
     address: "Sydney ",
     tags: ["cool", "teacher"],
-    col1: "123",
+    col1: random_number(),
     col2: "نام عملیات",
     col3: "ارز",
-    col4: "153000",
-    col5: "42500",
-    col6: "3560",
-    col7: "1480",
+    col4: random_number(),
+    col5: random_number(),
+    col6: random_number(),
+    col7: random_number(),
     col8: "",
     col9: "",
   },
 ];
-const TableUi = () => {
-  return <Table columns={columns} dataSource={data} />;
+
+const TableUi = ({ loader }) => {
+  useEffect(() => {
+    random_number()
+  }, [loader]);
+
+  return <Table columns={columns} dataSource={data} loading={loader} />;
 };
 
 export default TableUi;
