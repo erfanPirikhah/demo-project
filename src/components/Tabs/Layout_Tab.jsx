@@ -8,48 +8,10 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { css } from "@emotion/css";
-import Form_One from "../forms/Form_One";
-import Form_Two from "../forms/Form_Two";
-import Report from "../Report/Report";
+import { css } from "@emotion/css"
 import { useTabs, useTabsAction } from "../../context/TabProviders";
 
-// const initialItems = [
-//   {
-//     label: "تب شماره یک",
-//     children: <Form_One />,
-//     key: "1",
-//   },
-  // {
-  //   label: "تب شماره دو",
-  //   children: <Form_Two />,
-  //   key: "2",
-  // },
-//   {
-//     label: "تب شماره سه",
-//     children: "Content of Tab 3",
-//     key: "3",
-//     closable: <Report />,
-//   },
-//   {
-//     label: "تب شماره چهار",
-//     children: "Content of Tab 3",
-//     key: "4",
-//     // closable: false,
-//   },
-//   {
-//     label: "تب شماره پنج",
-//     children: "Content of Tab 3",
-//     key: "5",
-//     // closable: false,
-//   },
-//   {
-//     label: "تب شماره شش",
-//     children: "Content of Tab 3",
-//     key: "6",
-//     // closable: false,
-//   },
-// ];
+
 
 const DraggableTabNode = ({ className, onActiveBarTransform, ...props }) => {
   const {
@@ -98,7 +60,9 @@ const Layout_Tab = () => {
   const [items, setItems] = useState(initialItems);
 
   useEffect(()=>{
-    setActiveKey(initialItems[0]?.key)
+    let lastIndexInitItems = initialItems.length - 1
+    console.log(lastIndexInitItems);
+    setActiveKey(initialItems[lastIndexInitItems]?.key)
     setItems(initialItems)
   },[initialItems])
 

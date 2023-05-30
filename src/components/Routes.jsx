@@ -7,16 +7,19 @@ import Auth from "../pages/Auth";
 
 const Routes = () => {
   return (
-    // <Layout>
-    //   <Switch>
-    //     <Route path="/" exact Component={Home} />
-    //   </Switch>
-    // </Layout>
+
+    // <Switch>
+    //   <Layout>
+    //     <Switch>
+    //       <Route path="/" exact Component={Home} />
+    //     </Switch>
+    //   </Layout>
+    // </Switch>
 
     <Switch>
-      <Route path="/auth" element={Auth} />
+      <Route path="/auth" element={<Auth/>} />
       <Route element={<Layout />}>
-        <Route path="/" element={Home} />
+        <Route path="/" element={<Home/>} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Switch>
