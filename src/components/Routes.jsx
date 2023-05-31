@@ -7,7 +7,6 @@ import Auth from "../pages/Auth";
 
 const Routes = () => {
   return (
-
     // <Switch>
     //   <Layout>
     //     <Switch>
@@ -17,9 +16,9 @@ const Routes = () => {
     // </Switch>
 
     <Switch>
-      <Route path="/auth" element={<Auth/>} />
+      <Route path="/" element={<Auth />} />
       <Route element={<Layout />}>
-        <Route path="/" element={<Home/>} />
+        <Route path="/dashboard" element={<Home />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Switch>

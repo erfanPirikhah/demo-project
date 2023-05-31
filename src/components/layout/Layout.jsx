@@ -1,14 +1,24 @@
 import React, { Fragment, useState } from "react";
 import Sidbar from "../Sidbar/Sidbar";
-import { IoApps } from "react-icons/io5";
+import { IoApps, IoNotificationsSharp } from "react-icons/io5";
 import Profile_Menu from "../Profile_Menu/Profile_Menu";
-import { Button, Modal } from "antd";
 import { CiLogout } from "react-icons/ci";
-import { Outlet } from "react-router";
+import {
+  TbLayoutSidebarLeftCollapse,
+  TbLayoutSidebarRightCollapse,
+} from "react-icons/tb";
+import { GiExitDoor } from "react-icons/gi";
+import { SlEnvolopeLetter } from "react-icons/sl";
+import { Outlet, useNavigate } from "react-router";
+import { DownloadOutlined } from "@ant-design/icons";
+import { Button, Divider, Radio, Space, Modal, Badge, Avatar } from "antd";
+import { AiOutlineSearch, AiTwotoneSetting } from "react-icons/ai";
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -30,15 +40,78 @@ const Layout = () => {
           }  transform ease-in-out duration-500 px-2 flex flex-col w-full`}
         >
           <nav
-            className="sticky top-0 flex gap-3 items-center px-5 py-3 text-gray-700  bg-gray-50 dark:bg-[#1E293B] "
+            className="relative top-1 mb-2 px-5 py-3 text-gray-700
+            bg-gradient-to-r from-blue-100 to-green-100 inset-0 mx-5 rounded-lg flex gap-4 items-center"
             aria-label="Breadcrumb"
           >
             {/* <Profile_Menu /> */}
-            <button className="bg-inherit text-red-700" onClick={showModal}>
+            {/* <button className="bg-inherit text-red-700" onClick={showModal}>
               <CiLogout size={20} />
             </button>
             <button onClick={() => setIsOpen(!isOpen)}>
-              <IoApps size={25} className="text-gray-600 " />
+              <TbLayoutSidebarRightCollapse size={25} className="text-gray-600 " />
+            </button> */}
+            {/* <Button
+              className="bg-red-500 text-white"
+                type=""
+                icon={<CiLogout />}
+                size="default"
+              /> */}
+            <button
+              className=" text-red-400 border border-red-400 bg-white
+                 p-1 rounded-md transition ease-in-out delay-150 
+               hover:-translate-y-1 hover:scale-110 duration-200"
+              onClick={showModal}
+            >
+              <GiExitDoor size={20} />
+            </button>
+            <button
+              className=" text-blue-400 border border-blue-400 bg-white
+                p-1 rounded-full transition ease-in-out delay-150 
+               hover:-translate-y-1 hover:scale-110 duration-200"
+              onClick={showModal}
+            >
+              <AiOutlineSearch size={20} />
+            </button>
+            <Badge
+              count={5}
+              className=" transition ease-in-out delay-150 hover:-translate-y-1
+               hover:scale-110 duration-200 cursor-pointer"
+            >
+              <IoNotificationsSharp size={25} color="#ffbf00" />
+            </Badge>
+
+            <button
+              className=" text-green-400 border border-green-400 bg-white
+              p-1 rounded-md transition ease-in-out delay-150 
+            hover:-translate-y-1 hover:scale-110 duration-200"
+              onClick={showModal}
+            >
+              <SlEnvolopeLetter size={18} />
+            </button>
+            <button
+              className="text-white
+               text-indigo-600 bg-white border border-indigo-600 p-1 rounded-full transition ease-in-out delay-150 
+               hover:-translate-y-1 hover:scale-110 duration-200"
+            >
+              <AiTwotoneSetting size={20} />
+            </button>
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? (
+                <TbLayoutSidebarRightCollapse
+                  size={32}
+                  className=" text-gray-500 border border-gray-500 bg-white
+                p-1 rounded-full transition ease-in-out delay-150 
+               hover:-translate-y-1 hover:scale-110 duration-200"
+                />
+              ) : (
+                <TbLayoutSidebarLeftCollapse
+                  size={32}
+                  className=" text-gray-500 border border-gray-500 bg-white
+                p-1 rounded-full transition ease-in-out delay-150 
+               hover:-translate-y-1 hover:scale-110 duration-200"
+                />
+              )}
             </button>
           </nav>
 
@@ -61,7 +134,7 @@ const Layout = () => {
               خیر
             </button>
             <button
-              onClick={handleCancel}
+              onClick={() => navigate("/")}
               className="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-500 text-white duration-200 px-4 py-1 rounded-lg"
             >
               بله

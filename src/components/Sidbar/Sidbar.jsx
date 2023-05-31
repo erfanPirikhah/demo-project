@@ -16,44 +16,7 @@ import { IoClose } from "react-icons/io5";
 import { useTabs, useTabsAction } from "../../context/TabProviders";
 import Form_Two from "../forms/Form_Two";
 import { sideBars } from "./listSideBar";
-import {
-  MailOutlined,
-  SettingOutlined,
-  AppstoreOutlined,
-} from "@ant-design/icons";
-import { Menu, Switch } from "antd";
 
-function getItem(label, key, icon, children, component) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    component,
-  };
-}
-const items = [
-  getItem("صفحه اول", "sub1", <MailOutlined />, [
-    getItem("Option 1", "1", "&", "", <Form_Two />),
-    getItem("Option 2", "2"),
-    getItem("Option 3", "3"),
-    getItem("Option 4", "4"),
-  ]),
-  getItem("صفحه دوم", "sub2", <AppstoreOutlined />, [
-    getItem("Option 5", "5"),
-    getItem("Option 6", "6"),
-    getItem("Submenu", "sub3", null, [
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
-  ]),
-  getItem("صفحه سوم", "sub4", <SettingOutlined />, [
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
-    getItem("Option 11", "11"),
-    getItem("Option 12", "12"),
-  ]),
-];
 const Sidbar = (props) => {
   const dispatch = useTabsAction();
   const ref = useRef(null);

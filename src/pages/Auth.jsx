@@ -82,7 +82,7 @@ const Auth = () => {
                   <button
                     type="submit"
                     className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
-                  onClick={() =>navigate("/")}
+                  onClick={() =>navigate("/dashboard")}
                   >
                     ورود
                   </button>
