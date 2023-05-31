@@ -4,8 +4,9 @@ import { IoApps } from "react-icons/io5";
 import Profile_Menu from "../Profile_Menu/Profile_Menu";
 import { Button, Modal } from "antd";
 import { CiLogout } from "react-icons/ci";
+import { Outlet } from "react-router";
 
-const Layout = (props) => {
+const Layout = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -41,7 +42,7 @@ const Layout = (props) => {
             </button>
           </nav>
 
-          <div className="w-full ">{props.children}</div>
+          <div className="w-full ">{<Outlet />}</div>
         </div>
         <Sidbar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
