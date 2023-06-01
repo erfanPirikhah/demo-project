@@ -82,16 +82,16 @@ const Layout = () => {
             </Badge>
 
             <button
-              className=" text-green-400 border border-green-400 bg-white
+              className=" text-green-600 border border-green-600 bg-white
               p-1 rounded-md transition ease-in-out delay-150 
             hover:-translate-y-1 hover:scale-110 duration-200"
               onClick={showModal}
             >
-              <SlEnvolopeLetter size={18} />
+              <SlEnvolopeLetter size={20} />
             </button>
             <button
               className="text-white
-               text-indigo-600 bg-white border border-indigo-600 p-1 rounded-full transition ease-in-out delay-150 
+              text-indigo-400 bg-white border border-indigo-400 p-1 rounded-full transition ease-in-out delay-150 
                hover:-translate-y-1 hover:scale-110 duration-200"
             >
               <AiTwotoneSetting size={20} />
@@ -99,16 +99,16 @@ const Layout = () => {
             <button onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (
                 <TbLayoutSidebarRightCollapse
-                  size={32}
+                  size={29}
                   className=" text-gray-500 border border-gray-500 bg-white
-                p-1 rounded-full transition ease-in-out delay-150 
+                p-1 rounded-md transition ease-in-out delay-150 
                hover:-translate-y-1 hover:scale-110 duration-200"
                 />
               ) : (
                 <TbLayoutSidebarLeftCollapse
-                  size={32}
+                  size={29}
                   className=" text-gray-500 border border-gray-500 bg-white
-                p-1 rounded-full transition ease-in-out delay-150 
+                p-1 rounded-md transition ease-in-out delay-150 
                hover:-translate-y-1 hover:scale-110 duration-200"
                 />
               )}
