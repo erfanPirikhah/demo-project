@@ -10,6 +10,7 @@ import Form_Two from "../forms/Form_Two";
 import Form_Three from "../forms/Form_Three";
 import Form_Four from "../forms/Form_Four";
 import Report from "../Report/Report";
+import Form_Five from "../forms/Form_Five";
 
 export const sideBars = [
   {
@@ -59,6 +60,15 @@ export const sideBars = [
         component: {
           label: "نمودار گزارشات",
           children: <Report />,
+          key: "5",
+        },
+      },
+      {
+        id: 6,
+        name: " جدول",
+        component: {
+          label: " جدول",
+          children: <Form_Five />,
           key: "5",
         },
       },
