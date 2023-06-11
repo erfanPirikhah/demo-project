@@ -1,5 +1,4 @@
-import { DatePicker, Form, Input, Table, Button, Space, Radio } from "antd";
-import costumeTable from "../Tables/costumeTable";
+import { Form, Input, Table, Button, Space, Radio } from "antd";
 import CostumeTable from "../Tables/costumeTable";
 import {
   SortableContext,
@@ -8,13 +7,10 @@ import {
 } from "@dnd-kit/sortable";
 import { DndContext } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-// import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import ReactDragListView from "react-drag-listview";
-// const ReactDragListView = window["react-drag-listview"];
-// const ReactDragListView = require('react-drag-listview');
 
 const Form_Five = ({ children, ...props }) => {
   const [searchText, setSearchText] = useState("");
@@ -138,46 +134,6 @@ const Form_Five = ({ children, ...props }) => {
       ),
   });
 
-  //   // const columns = [
-  //   //   {
-  //   //     key: "sort",
-  //   //   },
-  //   //   {
-  //   //     title: "Name",
-  //   //     dataIndex: "name",
-  //   //   },
-  //   //   {
-  //   //     title: "Chinese Score",
-  //   //     dataIndex: "chinese",
-  //   //     sorter: {
-  //   //       compare: (a, b) => a.chinese - b.chinese,
-  //   //       multiple: 3,
-  //   //     },
-  //   //     width: "30%",
-  //   //     ...getColumnSearchProps("chinese"),
-  //   //   },
-  //   //   {
-  //   //     title: "Math Score",
-  //   //     dataIndex: "math",
-  //   //     sorter: {
-  //   //       compare: (a, b) => a.math - b.math,
-  //   //       multiple: 2,
-  //   //     },
-  //   //     width: "30%",
-  //   //     ...getColumnSearchProps("math"),
-  //   //   },
-  //   //   {
-  //   //     title: "English Score",
-  //   //     dataIndex: "english",
-  //   //     sorter: {
-  //   //       compare: (a, b) => a.english - b.english,
-  //   //       multiple: 1,
-  //   //     },
-  //   //     width: "30%",
-  //   //     ...getColumnSearchProps("english"),
-  //   //   },
-  //   // ];
-
   const [columns, setColumns] = useState([
     {
       key: "sort",
@@ -185,6 +141,7 @@ const Form_Five = ({ children, ...props }) => {
     {
       title: "Name",
       dataIndex: "name",
+      status : true
     },
     {
       title: "Chinese Score",
@@ -195,6 +152,7 @@ const Form_Five = ({ children, ...props }) => {
       },
       width: "30%",
       ...getColumnSearchProps("chinese"),
+      status : false
     },
     {
       title: "Math Score",
@@ -205,6 +163,7 @@ const Form_Five = ({ children, ...props }) => {
       },
       width: "30%",
       ...getColumnSearchProps("math"),
+      status : true
     },
     {
       title: "English Score",
@@ -215,6 +174,7 @@ const Form_Five = ({ children, ...props }) => {
       },
       width: "30%",
       ...getColumnSearchProps("english"),
+      status : true
     },
   ]);
 
@@ -250,54 +210,27 @@ const Form_Five = ({ children, ...props }) => {
     ,
   ]);
 
-  // const onDragEnd = ({ active, over }) => {
-  //   if (active.id !== over?.id) {
-  //     setDataSource((previous) => {
-  //       const activeIndex = previous.findIndex((i) => i.key === active.id);
-  //       const overIndex = previous.findIndex((i) => i.key === over?.id);
-  //       return arrayMove(previous, activeIndex, overIndex);
-  //     });
-  //   }
-  // };
-
-  //   const dragProps = {
-  //     onDragEnd(fromIndex, toIndex) {
-  //       const new_columns = [...columns];
-  //       const item = new_columns.splice(fromIndex, 1)[0];
-  //       new_columns.splice(toIndex, 0, item);
-  //       setColumns({
-  //         new_columns,
-  //       });
-  //     },
-  //     nodeSelector: "th",
-  //   };
-  // const onDragEndColumns = (fromIndex, toIndex) => {
-
-  // }
-
-  // const onDragEnd = (fromIndex, toIndex) => {
-  //   const columnsCopy = [...columns];
-  //   const item = columnsCopy.splice(fromIndex, 1)[0];
-  //   columnsCopy.splice(toIndex, 0, item);
-  //   setColumns({ columnsCopy });
-  // };
-
-  // const dragProps = {
-  //   onDragEnd,
-  //   nodeSelector: "th",
-  // };
+  const onDragEnd = ({ active, over }) => {
+    if (active.id !== over?.id) {
+      setDataSource((previous) => {
+        const activeIndex = previous.findIndex((i) => i.key === active.id);
+        const overIndex = previous.findIndex((i) => i.key === over?.id);
+        return arrayMove(previous, activeIndex, overIndex);
+      });
+    }
+  };
 
   const dragProps = {
     onDragEnd(fromIndex, toIndex) {
       const columnsCopy = [...columns];
       const item = columnsCopy.splice(fromIndex, 1)[0];
       columnsCopy.splice(toIndex, 0, item);
-      setColumns({
-        columnsCopy,
-      });
+      setColumns(columnsCopy);
     },
     nodeSelector: "th",
   };
+
+
   return (
     <Form>
       <Form.Item label="Size">
@@ -307,7 +240,7 @@ const Form_Five = ({ children, ...props }) => {
           <Radio.Button value="small">Small</Radio.Button>
         </Radio.Group>
       </Form.Item>
-      {/* <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}> */}
+      <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
       <SortableContext
         // rowKey array
         items={dataSource.map((i) => i.key)}
@@ -328,114 +261,9 @@ const Form_Five = ({ children, ...props }) => {
           />
         </ReactDragListView.DragColumn>
       </SortableContext>
-      {/* </DndContext> */}
+      </DndContext>
     </Form>
   );
 };
 
 export default Form_Five;
-
-// import React from 'react';
-// import { DatePicker, Form, Input, Table, Button, Space, Radio } from "antd";
-// import ReactDragListView from "react-drag-listview";
-// // https://github.com/raisezhang/react-drag-listview
-// // const ReactDragListView = window["react-drag-listview"];
-
-// class Demo extends React.Component {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             data: [
-//                 {
-//                     key: "1",
-//                     name: "Boran",
-//                     gender: "male",
-//                     age: "12",
-//                     address: "New York"
-//                 },
-//                 {
-//                     key: "2",
-//                     name: "JayChou",
-//                     gender: "male",
-//                     age: "38",
-//                     address: "TaiWan"
-//                 },
-//                 {
-//                     key: "3",
-//                     name: "Lee",
-//                     gender: "female",
-//                     age: "22",
-//                     address: "BeiJing"
-//                 },
-//                 {
-//                     key: "4",
-//                     name: "ChouTan",
-//                     gender: "male",
-//                     age: "31",
-//                     address: "HangZhou"
-//                 },
-//                 {
-//                     key: "5",
-//                     name: "AiTing",
-//                     gender: "female",
-//                     age: "22",
-//                     address: "Xi’An"
-//                 }
-//             ],
-//             columns: [
-//                 {
-//                     title: "Key",
-//                     dataIndex: "key"
-//                 },
-//                 {
-//                     title: "Name",
-//                     dataIndex: "name"
-//                 },
-//                 {
-//                     title: "Gender",
-//                     dataIndex: "gender"
-//                 },
-//                 {
-//                     title: "Age",
-//                     dataIndex: "age"
-//                 },
-//                 {
-//                     title: "Address",
-//                     dataIndex: "address"
-//                 }
-//             ]
-//         };
-
-//         const that = this;
-//         this.dragProps = {
-//             onDragEnd(fromIndex, toIndex) {
-//                 const columns = [...that.state.columns];
-//                 const item = columns.splice(fromIndex, 1)[0];
-//                 columns.splice(toIndex, 0, item);
-//                 that.setState({
-//                     columns
-//                 });
-//             },
-//             nodeSelector: "th"
-//         };
-//     }
-
-//     render() {
-//         return (
-//             <div style={{ margin: 20 }}>
-
-//                 <ReactDragListView.DragColumn {...this.dragProps}>
-//                     <Table
-//                         columns={this.state.columns}
-//                         pagination={false}
-//                         dataSource={this.state.data}
-//                         bordered
-//                     />
-//                 </ReactDragListView.DragColumn>
-//             </div>
-//         );
-//     }
-// }
-
-// export default Demo
