@@ -1,9 +1,9 @@
 import { useSortable } from "@dnd-kit/sortable";
 import React, { useState } from "react";
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined } from "@ant-design/icons";
 import { CSS } from "@dnd-kit/utilities";
 
-
+const ReactDragListView = window["react-drag-listview"];
 const columns = [
   {
     key: "sort",
