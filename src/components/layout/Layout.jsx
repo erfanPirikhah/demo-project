@@ -91,10 +91,10 @@ const Layout = () => {
             </button>
             <button
               className="text-white
-              text-indigo-400 bg-white border border-indigo-400 p-1 rounded-full transition ease-in-out delay-150 
+               bg-white border border-[#4f0fa8] p-1 rounded-full transition ease-in-out delay-150 
                hover:-translate-y-1 hover:scale-110 duration-200"
             >
-              <AiTwotoneSetting size={20} />
+              <AiTwotoneSetting color="#4f0fa8" size={20} />
             </button>
             <button onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (
