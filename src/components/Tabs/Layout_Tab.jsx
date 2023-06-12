@@ -53,7 +53,7 @@ const Layout_Tab = () => {
   const initialItems = useTabs();
   const dispatch = useTabsAction()
 
-  console.log(initialItems);
+  // console.log(initialItems);
   
 
   const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
@@ -61,7 +61,7 @@ const Layout_Tab = () => {
 
   useEffect(()=>{
     let lastIndexInitItems = initialItems.length - 1
-    console.log(lastIndexInitItems);
+    // console.log(lastIndexInitItems);
     setActiveKey(initialItems[lastIndexInitItems]?.key)
     setItems(initialItems)
   },[initialItems])
