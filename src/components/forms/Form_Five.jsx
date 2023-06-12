@@ -7,16 +7,18 @@ import {
 } from "@dnd-kit/sortable";
 import { DndContext } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined ,DownloadOutlined} from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import ReactDragListView from "react-drag-listview";
 import { Select } from "antd";
+import MultiSelect from "../Select/multiSelect";
+import { Excel } from "antd-table-saveas-excel";
 
 const Form_Five = ({ children, ...props }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const [size, setSize] = useState("large");
+  const [size, setSize] = useState("small");
 
   const handle_change_gender = (value, id) => {
     console.log(`selected ${value}`);
@@ -282,22 +284,25 @@ const Form_Five = ({ children, ...props }) => {
     {
       title: "نام",
       dataIndex: "name",
-      status: true,
+      key: "name",
+      hidden: false,
     },
     {
       title: "نام خانوادگی",
-      dataIndex: "chinese",
+      dataIndex: "family",
+      key: "family",
       sorter: {
-        compare: (a, b) => a.chinese - b.chinese,
+        compare: (a, b) => a.family - b.family,
         multiple: 3,
       },
       // width: "30%",
-      ...getColumnSearchProps("chinese"),
-      status: false,
+      ...getColumnSearchProps("family"),
+      hidden: false,
     },
     {
       title: "جنسیت",
       dataIndex: "gender",
+      key: "gender",
       sorter: {
         compare: (a, b) => a.gender - b.gender,
         multiple: 2,
@@ -323,40 +328,43 @@ const Form_Five = ({ children, ...props }) => {
         );
       },
       // width: "30%",
-      status: true,
+      hidden: false,
     },
     {
       title: "ارز",
-      dataIndex: "english",
+      dataIndex: "currency",
+      key: "currency",
       sorter: {
-        compare: (a, b) => a.english - b.english,
+        compare: (a, b) => a.currency - b.currency,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("english"),
-      status: true,
+      ...getColumnSearchProps("currency"),
+      hidden: false,
     },
     {
       title: "نرخ ارز",
-      dataIndex: "english",
+      dataIndex: "currency2",
+      key: "currency2",
       sorter: {
-        compare: (a, b) => a.english - b.english,
+        compare: (a, b) => a.currency2 - b.currency2,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("english"),
-      status: true,
+      ...getColumnSearchProps("currency2"),
+      hidden: false,
     },
     {
       title: "مالیات",
-      dataIndex: "english",
+      dataIndex: "tax",
+      key: "tax",
       sorter: {
-        compare: (a, b) => a.english - b.english,
+        compare: (a, b) => a.tax - b.tax,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("english"),
-      status: true,
+      ...getColumnSearchProps("tax"),
+      hidden: false,
     },
   ]);
 
@@ -364,72 +372,92 @@ const Form_Five = ({ children, ...props }) => {
     {
       key: "1",
       name: "John Brown",
-      chinese: 98,
+      family: '98',
       gender: "man",
-      english: 70,
+      currency: '70',
+      currency2:'324',
+      tax:'655'
     },
     {
       key: "2",
       name: "Jim Green",
-      chinese: 98,
+      family: '98',
       gender: "women",
-      english: 89,
+      currency: '89',
+      currency2:'45',
+      tax:'652'
     },
     {
       key: "3",
       name: "Joe Black",
-      chinese: 98,
+      family: '98',
       gender: "man",
-      english: 70,
+      currency: '70',
+      currency2:'345',
+      tax:'653'
     },
     {
       key: "4",
       name: "Jim Red",
-      chinese: 31,
+      family: '31',
       gender: "women",
-      english: 41,
+      currency: '41',
+      currency2:'234',
+      tax:'654'
     },
     {
       key: "5",
       name: "joe Red",
-      chinese: 62,
+      family: '62',
       gender: "man",
-      english: 65,
+      currency: '65',
+      currency2:'123',
+      tax:'6535'
     },
     {
       key: "6",
       name: "john parker",
-      chinese: 64,
+      family: '64',
       gender: "women",
-      english: 12,
+      currency: '12',
+      currency2:'120',
+      tax:'65'
     },
     {
       key: "7",
       name: "diana Red",
-      chinese: 88,
+      family: '88',
       gender: "women",
-      english: 54,
+      currency: '54',
+      currency2:'120',
+      tax:'65'
     },
     {
       key: "8",
       name: "Jim Red",
-      chinese: 87,
+      family: '87',
       gender: "man",
-      english: 89,
+      currency: '89',
+      currency2:'120',
+      tax:65
     },
     {
       key: "9",
       name: "leo messi",
-      chinese: 54,
+      family: '54',
       gender: "women",
-      english: 87,
+      currency: '87',
+      currency2:'120',
+      tax:'65'
     },
     {
       key: "10",
       name: "Joe Black",
-      chinese: 12,
+      family: '12',
       gender: "man",
-      english: 90,
+      currency: '90',
+      currency2:'120',
+      tax:'65'
     },
   ]);
 
@@ -453,8 +481,52 @@ const Form_Five = ({ children, ...props }) => {
     nodeSelector: "th",
   };
 
+
+  const showColumns = (columns)=>{
+    const newColumns = columns.filter(item => !item.hidden);
+    return newColumns
+  }
+
+
+  const handleChangeStatusColumns = (value) => {
+    const listValues = columns.map(list => ({ ...list, hidden: false }));
+    const changeStatusColumns = listValues.filter(list => value.includes(list.dataIndex)).map(list => ({ ...list, hidden: true }));
+  
+    const result = listValues.map(list => changeStatusColumns.find(column => column.dataIndex === list.dataIndex) || list);
+  
+    setColumns(result);
+  };
+
+
+  const handleClickExportExcel = ()=>{
+    const excel = new Excel();
+    const newColumns = columns.filter(column => column.dataIndex)
+    const removeExtraItem =  newColumns.map(column => {
+      return {
+        title: column.title,
+        dataIndex: column.dataIndex,
+        key: column.key
+      }
+    })
+    console.log(removeExtraItem);
+    excel
+      .addSheet("test")
+      .addColumns(removeExtraItem)
+      .addDataSource(dataSource, {
+        str2Percent: true
+      })
+      
+      .saveAs(`Excel-${Math.floor(Math.random()*100000)}.xlsx`);
+  }
   return (
     <Form>
+      <Form.Item label="columns"><MultiSelect listItem = {columns} handleChange={handleChangeStatusColumns} /></Form.Item>
+      {/* <button onClick={handleClickExportExcel}>Export</button> */}
+
+      <Button type="primary" className="bg-green-500" icon={<DownloadOutlined />} size={size} onClick={handleClickExportExcel}>
+         Export Excel
+      </Button>
+      
       <Form.Item label="Size">
         <Radio.Group value={size} onChange={handleSizeChange}>
           <Radio.Button value="large">Large</Radio.Button>
@@ -478,7 +550,7 @@ const Form_Five = ({ children, ...props }) => {
               bordered
               size={size}
               rowKey="key"
-              columns={columns}
+              columns={showColumns(columns)}
               dataSource={dataSource}
             />
           </ReactDragListView.DragColumn>
