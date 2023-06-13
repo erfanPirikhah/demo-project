@@ -135,7 +135,6 @@ const Form_Six = () => {
             okText="بله"
             cancelText="لغو"
             okType="success"
-            
           >
             <a>Delete</a>
           </Popconfirm>
@@ -185,12 +184,8 @@ const Form_Six = () => {
   });
   return (
     <div>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        className="bg-blue-400 mb-5 w-20 "
-      >
-        +
+      <Button onClick={handleAdd} type="primary" className="bg-blue-400 mb-5  ">
+        افزودن سطر
       </Button>
       <Table
         components={components}

@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import React, { useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { CSS } from "@dnd-kit/utilities";
+import { Form } from "antd";
 
 const ReactDragListView = window["react-drag-listview"];
 const columns = [
@@ -23,6 +24,8 @@ const columns = [
 ];
 
 const CostumeTable = ({ children, ...props }) => {
+  const EditableContext = React.createContext(null);
+  const [form] = Form.useForm();
   const {
     attributes,
     listeners,
@@ -51,6 +54,8 @@ const CostumeTable = ({ children, ...props }) => {
       : {}),
   };
   return (
+    <Form form={form} component={false}>
+    <EditableContext.Provider value={form}>
     <tr {...props} ref={setNodeRef} style={style} {...attributes}>
       {React.Children.map(children, (child) => {
         if (child.key === "sort") {
@@ -70,6 +75,9 @@ const CostumeTable = ({ children, ...props }) => {
         return child;
       })}
     </tr>
+    </EditableContext.Provider>
+  </Form>
+   
   );
 };
 
