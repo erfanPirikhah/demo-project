@@ -144,8 +144,8 @@ const Form_Five = ({ children, ...props }) => {
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={
-            (e) => console.log(e.target.value)
-            // setSelectedKeys(e.target.value ? [e.target.value] : [])
+            (e) => 
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
