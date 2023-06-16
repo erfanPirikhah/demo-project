@@ -16,6 +16,7 @@ import { AiOutlineSearch, AiTwotoneSetting } from "react-icons/ai";
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [open, setOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -35,13 +36,12 @@ const Layout = () => {
         <div
           // className={`flex flex-col w-full ${isOpen ? "" : ""
           //   } `}
-          className={`content ${
-            isOpen ? " md:mr-60" : ""
-          }  transform ease-in-out duration-500 px-2 flex flex-col w-full`}
+          className={`content ${isOpen ? " md:mr-60" : "md:mr-16"
+            }  transform ease-in-out duration-1000 px-2 flex flex-col w-full`}
         >
           <nav
             className="relative top-1 mb-2 px-5 py-3 text-gray-700
-            bg-gradient-to-r from-blue-100 to-green-100 inset-0 mx-5 rounded-lg flex gap-4 items-center"
+            bg-gradient-to-r from-blue-100 to-green-100 inset-0  rounded-lg flex gap-4 items-center"
             aria-label="Breadcrumb"
           >
             {/* <Profile_Menu /> */}
@@ -96,7 +96,10 @@ const Layout = () => {
             >
               <AiTwotoneSetting color="#4f0fa8" size={20} />
             </button>
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <button onClick={() => {
+              setIsOpen(!isOpen)
+              setOpen(!isOpen)
+            }}>
               {isOpen ? (
                 <TbLayoutSidebarRightCollapse
                   size={29}
@@ -115,9 +118,9 @@ const Layout = () => {
             </button>
           </nav>
 
-          <div className="w-full ">{<Outlet />}</div>
+          <div className="w-full "><Outlet /></div>
         </div>
-        <Sidbar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Sidbar isOpen={isOpen} setIsOpen={setIsOpen} open={open} setOpen={setOpen} />
       </div>
 
       <Modal

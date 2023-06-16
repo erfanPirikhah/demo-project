@@ -16,38 +16,43 @@ import { IoClose } from "react-icons/io5";
 import { useTabs, useTabsAction } from "../../context/TabProviders";
 import Form_Two from "../forms/Form_Two";
 import { sideBars } from "./listSideBar";
+import { TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse } from "react-icons/tb";
 
 const Sidbar = (props) => {
   const dispatch = useTabsAction();
   const ref = useRef(null);
-  const { isOpen, setIsOpen } = props;
+  const { isOpen, setIsOpen, open, setOpen } = props;
 
+  const commonProps = {
+    size: 29,
+    className: "text-gray-500  bg-white p-1 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
+  };
+
+  const CollapseComponent = isOpen ? TbLayoutSidebarRightCollapse : TbLayoutSidebarLeftCollapse;
+  // handling hover event
+  const handleHover = (isOpen) => {
+    if (!open) {
+      setIsOpen(isOpen)
+    }
+  };
   return (
     <div
-      className={`w-60 ${
-        isOpen ? "" : "translate-x-60"
-      } fixed right-0 transition transform ease-in-out duration-1000 z-50 flex h-screen bg-white flex flex-col overflow-y-auto  rounded-l-3xl`}
+      onMouseEnter={() => handleHover(true)}
+      onMouseLeave={() => handleHover(false)}
+      className={`w-60 ${isOpen ? "" : "translate-x-44"
+        } fixed right-0 transition transform ease-in-out duration-1000 z-50 flex h-screen bg-white flex flex-col overflow-y-auto  rounded-l-3xl`}
     >
-      {/* className={`sticky top-0  h-screen  flex flex-col w-80 bg-white rounded-l-3xl overflow-y-auto
-       transition transform ease-in-out duration-1000 ${isOpen ? "" : "translate-x-72"}`} */}
+
 
       <div className="flex justify-between items-center  px-5 h-20 shadow-md">
-        <button className="text-gray-500" onClick={() => setIsOpen(false)}>
-          <IoClose size={20} />
-        </button>
-        <h1 className="text-xl uppercase text-indigo-500">logo</h1>
+        {/* <button className="text-gray-500" onClick={() => {
+          setIsOpen(!isOpen)
+          setOpen(!open)
+        }}>
+          <CollapseComponent {...commonProps} />
+        </button> */}
+        <h1 className="text-base uppercase text-indigo-500">logo</h1>
       </div>
-      {/* <Menu
-        theme="light"
-        onClick={onClick}
-        style={{
-          width: 256,
-        }}
-        // defaultOpenKeys={["sub1"]}
-        // selectedKeys={[current]}
-        mode="inline"
-        items={items}
-      /> */}
       <ul className="flex flex-col py-4">
         {sideBars.map((sideBar) => {
           return (
@@ -58,15 +63,14 @@ const Sidbar = (props) => {
                     {({ open }) => (
                       <>
                         <Disclosure.Button
-                          className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-xs font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${
-                            open ? "bg-indigo-100" : ""
-                          }`}
+                          className={`flex w-full justify-between rounded-lg py-2 px-3  text-left text-xs font-medium text-gray-500 hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-900 hover:bg-indigo-100 ${open ? "bg-indigo-100" : ""
+                            }`}
+                          onClick={() => !isOpen ? setIsOpen(true) : null}
                         >
-                          <BsChevronDown
-                            className={`${
-                              open ? "rotate-180 transform" : ""
-                            } h-4 w-4 text-gray-500`}
-                          />
+                          {isOpen ? <BsChevronDown
+                            className={`${open ? "rotate-180 transform" : ""
+                              } h-4 w-4 text-gray-500`}
+                          /> : <>{sideBar.icon}</>}
                           <div className="flex justify-between items-center gap-4">
                             <span>{sideBar.name} </span>
                             {sideBar.icon}
