@@ -1,4 +1,4 @@
-import { Form, Input, Table, Button, Space, Radio } from "antd";
+import { Form, Input, Table, Button, Space, Radio, Popconfirm } from "antd";
 import CostumeTable from "../Tables/costumeTable";
 import {
   SortableContext,
@@ -16,6 +16,17 @@ import MultiSelect from "../Select/multiSelect";
 import { Excel } from "antd-table-saveas-excel";
 
 const EditableContext = React.createContext(null);
+
+const EditableRow = ({ index, ...props }) => {
+  const [form] = Form.useForm();
+  return (
+    <Form form={form} component={false}>
+      <EditableContext.Provider value={form}>
+        <tr {...props} />
+      </EditableContext.Provider>
+    </Form>
+  );
+};
 
 const EditableCell = ({
   title,
@@ -36,9 +47,6 @@ const EditableCell = ({
   }, [editing]);
   const toggleEdit = () => {
     setEditing(!editing);
-    console.log({
-      [dataIndex]: record[dataIndex],
-    });
     form.setFieldsValue({
       [dataIndex]: record[dataIndex],
     });
@@ -143,8 +151,7 @@ const Form_Five = ({ children, ...props }) => {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={
-            (e) => 
+          onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -353,12 +360,38 @@ const Form_Five = ({ children, ...props }) => {
       ),
   });
 
+  const [count, setCount] = useState(15);
+  const handleDelete = (key) => {
+    const newData = dataSource.filter((item) => item.key !== key);
+    setDataSource(newData);
+  };
+
   const [columns, setColumns] = useState([
-    {
-      key: "sort",
-    },
+    // {
+    //   key: "sort",
+    // },
     {
       title: "نام",
+      render: (record) => {
+        console.log(record);
+        return (
+          <span>
+            {record.length == 0 ? (
+              <Input
+                // style={{ width: 200 }}
+                size="small"
+                className="w-full p-1 bg-white border border-gray-200"
+                placeholder={`Search name`}
+                // allowClear
+                // enterButton="Search"
+                onSearch={(value) => console.log(value)}
+              />
+            ) : (
+              record
+            )}
+          </span>
+        );
+      },
       dataIndex: "name",
       key: "name",
       editable: true,
@@ -373,8 +406,27 @@ const Form_Five = ({ children, ...props }) => {
         compare: (a, b) => a.family - b.family,
         multiple: 3,
       },
+      render: (record) => {
+        return (
+          <span>
+            {record.length == 0 ? (
+              <Input
+                // style={{ width: 200 }}
+                size="small"
+                className="w-full p-1 bg-white border border-gray-200"
+                placeholder={`Search family name`}
+                // allowClear
+                // enterButton="Search"
+                onSearch={(value) => console.log(value)}
+              />
+            ) : (
+              record
+            )}
+          </span>
+        );
+      },
       // width: "30%",
-      ...getColumnSearchProps("family"),
+      // ...getColumnSearchProps("family"),
       hidden: false,
     },
     {
@@ -382,28 +434,57 @@ const Form_Five = ({ children, ...props }) => {
       dataIndex: "gender",
       key: "gender",
       editable: true,
+
       sorter: {
         compare: (a, b) => a.gender - b.gender,
         multiple: 2,
       },
-      ...getColumnSelectSearchProps("gender"),
+      // ...getColumnSelectSearchProps("gender"),
       render: (gender, item) => {
         const index = item.key;
         return (
-          <Select
-            value={gender}
-            style={{
-              width: "80%",
-            }}
-            placeholder="Select a person"
-            optionFilterProp="children"
-            onChange={(e) => handle_change_gender(e, index)}
-            onSearch={onSearch}
-            filterOption={(input, option) =>
-              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-            }
-            options={genderOptions}
-          />
+          <span>
+            {gender.length == 0 ? (
+              <Select
+                // value={gender}
+                style={{
+                  width: "90%",
+                }}
+                placeholder="Select a gender"
+                optionFilterProp="children"
+                // onChange={(e) => handle_change_gender(e, index)}
+                // onSearch={onSearch}
+                // filterOption={(input, option) =>
+                //   (option?.label ?? "")
+                //     .toLowerCase()
+                //     .includes(input.toLowerCase())
+                // }
+                options={[
+                  { label: "همه", value: "" },
+                  { label: "مرد", value: "man" },
+                  { label: "زن", value: "woman" },
+                ]}
+              />
+            ) : (
+              gender
+              // <Select
+              //   value={gender}
+              //   style={{
+              //     width: "90%",
+              //   }}
+              //   placeholder="Select a person"
+              //   optionFilterProp="children"
+              //   onChange={(e) => handle_change_gender(e, index)}
+              //   onSearch={onSearch}
+              //   filterOption={(input, option) =>
+              //     (option?.label ?? "")
+              //       .toLowerCase()
+              //       .includes(input.toLowerCase())
+              //   }
+              //   options={genderOptions}
+              // />
+            )}
+          </span>
         );
       },
       // width: "30%",
@@ -414,39 +495,111 @@ const Form_Five = ({ children, ...props }) => {
       dataIndex: "currency",
       key: "currency",
       editable: true,
+      render: (record) => {
+        // console.log(record);
+        return (
+          <span>
+            {record.length == 0 ? (
+              <Input
+                // style={{ width: 200 }}
+                size="small"
+                className="w-full p-1 bg-white border border-gray-200"
+                placeholder={`Search currency`}
+                // allowClear
+                // enterButton="Search"
+                onSearch={(value) => console.log(value)}
+              />
+            ) : (
+              record
+            )}
+          </span>
+        );
+      },
       sorter: {
         compare: (a, b) => a.currency - b.currency,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("currency"),
+      // ...getColumnSearchProps("currency"),
       hidden: false,
     },
     {
       title: "نرخ ارز",
       dataIndex: "currency2",
       key: "currency2",
+      render: (record) => {
+        // console.log(record);
+        return (
+          <span>
+            {record.length == 0 ? (
+              <Input
+                // style={{ width: 200 }}
+                size="small"
+                className="w-full p-1 bg-white border border-gray-200"
+                placeholder={`Search currency`}
+                // allowClear
+                // enterButton="Search"
+                onSearch={(value) => console.log(value)}
+              />
+            ) : (
+              record
+            )}
+          </span>
+        );
+      },
       editable: true,
       sorter: {
         compare: (a, b) => a.currency2 - b.currency2,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("currency2"),
+      // ...getColumnSearchProps("currency2"),
       hidden: false,
     },
     {
-      title: "مالیات",
+      title: "نرخ ارز",
       dataIndex: "tax",
       key: "tax",
+      render: (record) => {
+        return (
+          <span>
+            {record.length == 0 ? (
+              <Input
+                // style={{ width: 200 }}
+                size="small"
+                className="w-full p-1 bg-white border border-gray-200"
+                placeholder={`Search currency`}
+                // allowClear
+                // enterButton="Search"
+                onSearch={(value) => console.log(value)}
+              />
+            ) : (
+              record
+            )}
+          </span>
+        );
+      },
       editable: true,
       sorter: {
         compare: (a, b) => a.tax - b.tax,
         multiple: 1,
       },
       // width: "30%",
-      ...getColumnSearchProps("tax"),
+      // ...getColumnSearchProps("tax"),
       hidden: false,
+    },
+    {
+      title: "operation",
+      dataIndex: "operation",
+      render: (_, record) =>
+        dataSource.length >= 1 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <a>Delete</a>
+          </Popconfirm>
+        ) : null,
     },
   ]);
 
@@ -616,7 +769,7 @@ const Form_Five = ({ children, ...props }) => {
     setDataSource(newData);
   };
 
-  const newColumns = columns.map((col) => {
+  const new_columns = columns.map((col) => {
     if (!col.editable) {
       return col;
     }
@@ -631,12 +784,11 @@ const Form_Five = ({ children, ...props }) => {
       }),
     };
   });
-
+  let column = showColumns(new_columns);
   return (
     <Form>
       <div className="flex justify-between  ">
         {/* <button onClick={handleClickExportExcel}>Export</button> */}
-
         <Button
           type="primary"
           className="bg-blue-500"
@@ -670,7 +822,7 @@ const Form_Five = ({ children, ...props }) => {
             <Table
               components={{
                 body: {
-                  row: CostumeTable,
+                  row: EditableRow,
                   cell: EditableCell,
                 },
               }}
@@ -678,8 +830,37 @@ const Form_Five = ({ children, ...props }) => {
               bordered
               size={size}
               rowKey="key"
-              columns={showColumns(columns)}
+              columns={showColumns(new_columns)}
               dataSource={dataSource}
+              summary={() => (
+                <Table.Summary fixed="top">
+                  <Table.Summary.Row>
+                    {column.map((item) => {
+                      return (
+                        item.title !== "operation" && (
+                          <Table.Summary.Cell>
+                            <Input
+                              // style={{ width: 200 }}
+                              size="small"
+                              className="w-full p-1 bg-white border border-gray-200"
+                              placeholder={`جستجو ${item.title}`}
+                              // allowClear
+                              // enterButton="Search"
+                              onChange={() =>
+                                getColumnSearchProps(item.dataIndex)
+                              }
+                              onSearch={(value) =>
+                                getColumnSearchProps(item.dataIndex)
+                              }
+                            />
+                          </Table.Summary.Cell>
+                        )
+                      );
+                    })}
+                  </Table.Summary.Row>
+                </Table.Summary>
+              )}
+              sticky
             />
           </ReactDragListView.DragColumn>
         </SortableContext>
